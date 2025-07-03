@@ -1,0 +1,2 @@
+@Library('bss-shopify-app-library@tb-customers-admin') _
+initPipeline("$BRANCH_NAME")
