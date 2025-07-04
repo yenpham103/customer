@@ -8,19 +8,18 @@ export default async function DashboardLayout({
     children: React.ReactNode
 }>) {
     const session = await auth()
-    // If user is authenticated, redirect to dashboard
+
     if (!session) {
         redirect("/")
     }
 
+    if (!session.user.role) {
+        redirect("/guest-dashboard")
+    }
+
     return (
         <AppFrame session={session}>
-            {
-            session?.user?.role === "admin" ? (
-                children
-            ) : (
-                <>You have no permissions</>
-            )}
+            {children}
         </AppFrame>
     )
 }

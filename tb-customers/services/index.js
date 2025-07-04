@@ -5,6 +5,8 @@ const ListOrdersService = require("./order");
 const OperatorsService = require("./operators");
 const ShopService = require("./shop");
 const ShopDetailService = require("./shopDetail");
+const UserService = require("./user");
+const PermissionService = require("./permission");
 
 module.exports = {
     ConversationService,
@@ -13,5 +15,7 @@ module.exports = {
     ListOrdersService,
     OperatorsService,
     ShopService,
-    ShopDetailService   
+    ShopDetailService,
+    UserService,
+    PermissionService
 }

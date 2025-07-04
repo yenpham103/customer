@@ -1,7 +1,9 @@
 .Polaris-TopBar-UserMenu__Details {
     max-width: fit-content !important;
 }
-
+.Polaris-LegacyTabs__Panel > .Polaris-LegacyCard__LastSectionPadding {
+    padding: 0 !important;
+}
 .bss-store-data_btn {
     position: absolute;
     top: -2px;

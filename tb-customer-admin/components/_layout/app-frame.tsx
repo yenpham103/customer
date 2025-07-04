@@ -10,7 +10,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
-export default function AppNavigation({ children, session }: { children: React.ReactNode, session: any }) {
+interface AppFrameProps {
+  children: React.ReactNode;
+  session: any;
+  isGuestMode?: boolean
+}
+
+export default function AppNavigation({ children, session, isGuestMode }: AppFrameProps) {
   "use client"
   const [isLoading, _] = React.useState(false);
   const [userMenuActive, setUserMenuActive] = React.useState(false);
@@ -80,7 +86,7 @@ export default function AppNavigation({ children, session }: { children: React.R
 
   const pageMarkup = isLoading ? loadingPageMarkup : actualPageMarkup;
 
-  const navigationMarkup = typeof window !== undefined ? (
+  const navigationMarkup = !isGuestMode && typeof window !== undefined ? (
     <Navigation location="/">
       <Scrollable style={{ flex: 1 }}>
         <Navigation.Section
@@ -150,7 +156,7 @@ export default function AppNavigation({ children, session }: { children: React.R
         }}
       />
     </Navigation>
-  ) : <></>;
+  ) : null;
 
   const loadingMarkup = isLoading ? <Loading /> : null;
 
@@ -175,7 +181,7 @@ export default function AppNavigation({ children, session }: { children: React.R
 
   const topBarMarkup = (
     <TopBar
-      showNavigationToggle
+      showNavigationToggle={!isGuestMode}
       userMenu={userMenuMarkup}
       onNavigationToggle={toggleMobileNavigationActive}
     />
@@ -185,7 +191,7 @@ export default function AppNavigation({ children, session }: { children: React.R
     <Frame
       topBar={topBarMarkup}
       navigation={navigationMarkup}
-      showMobileNavigation={mobileNavigationActive}
+      showMobileNavigation={mobileNavigationActive && !isGuestMode}
       onNavigationDismiss={toggleMobileNavigationActive}
     >
       {loadingMarkup}
